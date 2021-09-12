@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Jacaranda Test API
+  version: "1.0.0"
+servers:
+  - url: http://localhost:5000/
+paths:
+  /ticket:
+    get:
+      operationId: ticket.getAll
+      tags:
+        - Ticket
+      summary: Returns a list of tickets.
+      description: Returns a list of tickets.
+      responses:
+        "200": # status code
+          description: Return the entire list of tickets.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+    post:
+      operationId: ticket.create
+      tags:
+        - Ticket
+      summary: Create a new Ticket
+      description: Create a new Ticket
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        "201":
+          description: Ticket Created successfully
+  /ticket/{id}:
+    get:
+      operationId: ticket.get
+      tags:
+        - Ticket
+      summary: Return an Ticket with given ID
+      description: Return an Ticket with given ID
+      parameters:
+        - name: id
+          in: path
+          description: Ticket ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Return an Ticket with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+    put:
+      operationId: ticket.update
+      tags:
+        - Ticket
+      summary: Update an Ticket with given ID
+      description: Update an Ticket with given ID
+      parameters:
+        - name: id
+          in: path
+          description: Ticket ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ticket"
+      responses:
+        "200": # status code
+          description: Updated an Ticket with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+  /message:
+    get:
+      operationId: message.getAll
+      tags:
+        - Message
+      summary: Returns a list of messages.
+      description: Returns a list of messages.
+      responses:
+        "200": # status code
+          description: Return the entire list of messages.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    post:
+      operationId: message.create
+      tags:
+        - Message
+      summary: Create a new Message
+      description: Create a new Message
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Message"
+      responses:
+        "201":
+          description: Message Created successfully
+
+components:
+  schemas:
+    Ticket:
+      type: object
+      properties:
+        phone:
+          type: string
+        subject:
+          type: string
+        ticket_id:
+          type: number
+        intents:
+          type: array
+          items:
+            type: string
+    Message:
+      type: object
+      properties:
+        id:
+          type: number
+        ticket_id:
+          type: number
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        description:
+          type: string
+        user_id:
+          type: number
+        incoming:
+          type: boolean
