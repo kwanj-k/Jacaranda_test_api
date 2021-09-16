@@ -10,13 +10,12 @@ class TicketRepo:
     db.session.add(ticket)
     db.session.commit()
 
-  def fetchById(_id):
-    return db.session.query(Ticket).filter_by(id=_id).first()
+  def fetchById(id):
+    return db.session.query(Ticket).filter_by(id=id).first()
 
 
   def fetchAll(self):
-    from sqlalchemy.orm import joinedload
-    return Ticket.query.options(joinedload('messages'))
+    return db.session.query(Ticket).all()
   
   def fetchTktMsgAll(self):
     return db.session.query(Ticket).all()
@@ -30,15 +29,15 @@ class TicketRepo:
 class MessageRepo:
   
     def create(self, message):
-        db.session.add(message)
-        db.session.commit()
+      db.session.add(message)
+      db.session.commit()
 
-    def fetchById(_id) -> 'Message':
-        return db.session.query(Message).filter_by(id=_id).first()
+    def fetchById(self, id):
+      return db.session.query(Message).filter_by(id=id).first()
 
-    def fetchAll(self) -> List['Message']:
-        return db.session.query(Message).all()
+    def fetchAll(self):
+      return db.session.query(Message).all()
 
     def update(self, message_data):
-        db.session.merge(message_data)
-        db.session.commit()
+      db.session.merge(message_data)
+      db.session.commit()

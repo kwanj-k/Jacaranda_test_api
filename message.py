@@ -11,7 +11,7 @@ MSG_NOT_FOUND = "Message not found for id: {}"
 def get(id):
   msg_data = msgRepo.fetchById(id)
   if msg_data:
-      return MessageSchema.dump(msg_data)
+      return msgSchema.dump(msg_data)
   return {'message': MSG_NOT_FOUND.format(id)}, 404
 
 

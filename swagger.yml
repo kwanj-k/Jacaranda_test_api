@@ -109,6 +109,54 @@ paths:
       responses:
         "201":
           description: Message Created successfully
+  /message/{id}:
+    get:
+      operationId: message.get
+      tags:
+        - Message
+      summary: Return an Message with given ID
+      description: Return an Message with given ID
+      parameters:
+        - name: id
+          in: path
+          description: Message ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200": # status code
+          description: Return an Message with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+    put:
+      operationId: message.update
+      tags:
+        - Message
+      summary: Update an Message with given ID
+      description: Update an Message with given ID
+      parameters:
+        - name: id
+          in: path
+          description: Message ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Message"
+      responses:
+        "200": # status code
+          description: Updated an Message with given ID
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
 
 components:
   schemas:

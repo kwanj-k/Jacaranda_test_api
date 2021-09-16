@@ -2,6 +2,9 @@ from models.repositories import TicketRepo
 from schemas.schemas import TicketSchema
 from flask import request
 
+from seed import data_upload
+
+
 ticketRepo = TicketRepo()
 ticketSchema = TicketSchema()
 ticketListSchema = TicketSchema(many=True)
@@ -37,22 +40,6 @@ def create():
     return ticketSchema.dump(ticket_data), 201
 
 def getAll():
-  # tkts = ticketRepo.fetchTktMsgAll()
-  # s = TicketCustomSchema()
+  data_upload()
   res = ticketRepo.fetchAll()
-  # tickets = []
-  # for t in res:
-  #   new_ticket = {
-  #       'ticket_id': t.ticket_id,
-  #       'phone': t.phone,
-  #       'subject': t.subject,
-  #       'intents': t.intents,
-  #   }
-  #   messages = t.messages
-  #   for msg in t.messages:
-  #     if msg.incoming:
-  #       new_ticket['incoming_messages'] = n_msg
-  #     else:
-  #       new_ticket['outgoing_messages'] = n_msg
-  #   tickets.append(new_ticket)
   return ticketListSchema.dump(res), 200

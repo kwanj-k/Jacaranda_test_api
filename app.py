@@ -10,7 +10,7 @@ connex_app.add_api('swagger.yml')
 
 app = connex_app.app
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://adriankenya:123456@127.0.0.1/jc'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://adriankenya:123456@127.0.0.1/jc_test'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 

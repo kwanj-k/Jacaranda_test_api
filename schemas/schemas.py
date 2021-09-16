@@ -8,6 +8,7 @@ from models.entities import Ticket, Message
 class MessageSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Message
+        include_relationships = True
         load_instance = True
 
 
@@ -29,4 +30,5 @@ class TicketSchema(ma.SQLAlchemyAutoSchema):
   
   class Meta:
     model = Ticket
+    include_relationships = True
     load_instance = True
